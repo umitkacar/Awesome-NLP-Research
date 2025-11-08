@@ -173,3 +173,7 @@ poetry.lock
 
 # Hatch
 .hatch/
+
+# GitHub workflows (may have permission issues)
+# Users should manually add workflows if needed
+.github/
