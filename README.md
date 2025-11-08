@@ -18,12 +18,14 @@
 ## 📚 Table of Contents
 
 - [🌟 Overview](#-overview)
+- [⚡ Quick Start](#-quick-start)
 - [🔥 2024-2025 Trending Models](#-2024-2025-trending-models)
 - [🏆 State-of-the-Art Repositories](#-state-of-the-art-repositories)
 - [📄 Breakthrough Papers](#-breakthrough-papers)
 - [🛠️ Tools & Frameworks](#️-tools--frameworks)
 - [📖 Learning Resources](#-learning-resources)
 - [🎯 Project Ideas](#-project-ideas)
+- [💻 Development](#-development)
 - [🤝 Contributing](#-contributing)
 
 ---
@@ -50,6 +52,64 @@ Welcome to the **most comprehensive NLP research repository** for 2024-2025! Thi
 ✅ Community-Driven Projects
 ✅ Real-World Applications
 ```
+
+---
+
+## ⚡ Quick Start
+
+### 📦 Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/umitkacar/NLP_Research.git
+cd NLP_Research
+
+# Install the package
+pip install -e .
+
+# Or install with all dependencies
+pip install -e ".[all]"
+```
+
+### 🚀 Basic Usage
+
+```python
+from nlp_research import TextClassifier, TextPreprocessor, get_device
+
+# Check available device
+print(f"Using device: {get_device()}")
+
+# Text Classification
+classifier = TextClassifier("bert-base-uncased", num_labels=2)
+result = classifier.predict("This is an amazing NLP library!")
+print(result)
+# {'label': 'POSITIVE', 'score': 0.9998, 'class_id': 1}
+
+# Text Preprocessing
+preprocessor = TextPreprocessor()
+cleaned_text = preprocessor.clean("Check out https://example.com! 🎉")
+print(cleaned_text)
+# 'check example'
+```
+
+### 🛠️ Development Setup
+
+```bash
+# Install development dependencies
+pip install -e ".[dev]"
+
+# Set up pre-commit hooks
+pre-commit install
+
+# Run tests
+pytest
+
+# Run linting and formatting
+make format
+make lint
+```
+
+See [DEVELOPMENT.md](DEVELOPMENT.md) for detailed development guide.
 
 ---
 
@@ -357,6 +417,90 @@ for ent in doc.ents:
 - 🔍 **RAG Systems** - Retrieval-augmented generation
 - 🌐 **Machine Translation** - Neural MT systems
 - 📈 **Question Answering** - Open-domain QA systems
+
+---
+
+## 💻 Development
+
+### 🏗️ Project Structure
+
+```
+NLP_Research/
+├── src/nlp_research/      # Main package
+│   ├── models.py          # NLP models
+│   ├── preprocessing.py   # Text preprocessing
+│   └── utils.py           # Utilities
+├── tests/                 # Test suite
+├── examples/              # Usage examples
+├── docs/                  # Documentation
+├── pyproject.toml         # Project config
+└── Makefile              # Dev commands
+```
+
+### 🔧 Tech Stack
+
+| Category | Tools |
+|----------|-------|
+| **Build System** | Hatch |
+| **Linting** | Ruff (replaces flake8, isort, pyupgrade) |
+| **Formatting** | Black |
+| **Type Checking** | MyPy |
+| **Testing** | Pytest + Coverage |
+| **Pre-commit** | Multiple hooks for code quality |
+| **CI/CD** | GitHub Actions |
+
+### 📋 Available Commands
+
+```bash
+make help           # Show all available commands
+make install        # Install package
+make dev-install    # Install with dev dependencies
+make test           # Run tests
+make test-cov       # Run tests with coverage
+make lint           # Lint code
+make format         # Format code
+make type-check     # Type check
+make pre-commit     # Run pre-commit hooks
+make build          # Build package
+```
+
+### 🧪 Running Tests
+
+```bash
+# Run all tests
+make test
+
+# Run with coverage
+make test-cov
+
+# Run specific test markers
+pytest -m unit              # Unit tests only
+pytest -m integration       # Integration tests only
+pytest -m "not slow"        # Skip slow tests
+```
+
+### 📊 Code Quality Checks
+
+All code is automatically checked with:
+- **Ruff** - Fast linting (E, F, I, B, C4, UP, ARG, SIM, etc.)
+- **Black** - Code formatting (100 char line length)
+- **MyPy** - Static type checking
+- **Bandit** - Security vulnerability scanning
+- **Pre-commit hooks** - Automated checks on every commit
+
+### 🚀 CI/CD Pipeline
+
+GitHub Actions runs on every push and PR:
+- ✅ Code quality checks (Ruff, Black, MyPy)
+- ✅ Security scanning (Bandit, Safety)
+- ✅ Tests on Python 3.9-3.12
+- ✅ Tests on Ubuntu, Windows, macOS
+- ✅ Coverage reporting
+- ✅ Package building
+
+### 📖 Documentation
+
+For detailed development instructions, see [DEVELOPMENT.md](DEVELOPMENT.md).
 
 ---
 
