@@ -11,7 +11,7 @@ requires-python = ">=3.9"
 license = "MIT"
 keywords = ["nlp", "natural-language-processing", "machine-learning", "deep-learning", "transformers", "llm"]
 authors = [
-    { name = "Umit Kacar", email = "umit@example.com" },
+    { name = "Umit Kacar" },
 ]
 classifiers = [
     "Development Status :: 4 - Beta",
@@ -32,13 +32,19 @@ dependencies = [
     "transformers>=4.40.0",
     "torch>=2.0.0",
     "numpy>=1.24.0",
-    "pandas>=2.0.0",
-    "spacy>=3.7.0",
-    "langchain>=0.1.0",
     "huggingface-hub>=0.20.0",
 ]
 
 [project.optional-dependencies]
+nlp = [
+    # Additional NLP tools
+    "spacy>=3.7.0",
+    "pandas>=2.0.0",
+]
+langchain = [
+    # LangChain for building LLM applications
+    "langchain>=0.1.0",
+]
 dev = [
     # Testing
     "pytest>=8.0.0",
@@ -61,7 +67,7 @@ docs = [
     "mkdocstrings[python]>=0.24.0",
 ]
 all = [
-    "nlp-research[dev,docs]",
+    "nlp-research[nlp,langchain,dev,docs]",
 ]
 
 [project.urls]

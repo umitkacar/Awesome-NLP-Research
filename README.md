@@ -64,8 +64,14 @@ Welcome to the **most comprehensive NLP research repository** for 2024-2025! Thi
 git clone https://github.com/umitkacar/NLP_Research.git
 cd NLP_Research
 
-# Install the package
+# Minimal installation (transformers + torch)
 pip install -e .
+
+# With NLP tools (spaCy, pandas)
+pip install -e ".[nlp]"
+
+# With LangChain support
+pip install -e ".[langchain]"
 
 # Or install with all dependencies
 pip install -e ".[all]"
@@ -85,7 +91,8 @@ result = classifier.predict("This is an amazing NLP library!")
 print(result)
 # {'label': 'POSITIVE', 'score': 0.9998, 'class_id': 1}
 
-# Text Preprocessing
+# Text Preprocessing (requires nlp extras)
+# pip install -e ".[nlp]"
 preprocessor = TextPreprocessor()
 cleaned_text = preprocessor.clean("Check out https://example.com! 🎉")
 print(cleaned_text)

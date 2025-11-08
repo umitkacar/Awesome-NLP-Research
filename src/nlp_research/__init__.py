@@ -2,15 +2,23 @@
 
 __version__ = "0.1.0"
 __author__ = "Umit Kacar"
-__email__ = "umit@example.com"
 
 from nlp_research.models import TextClassifier
-from nlp_research.preprocessing import TextPreprocessor
-from nlp_research.utils import get_device, load_config
+from nlp_research.utils import count_parameters, get_device, load_config, save_config
 
 __all__ = [
     "TextClassifier",
-    "TextPreprocessor",
     "get_device",
     "load_config",
+    "save_config",
+    "count_parameters",
 ]
+
+# Optional imports
+try:
+    from nlp_research.preprocessing import TextPreprocessor
+
+    __all__.append("TextPreprocessor")
+except ImportError:
+    # spaCy not installed, TextPreprocessor not available
+    pass

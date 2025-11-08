@@ -3,7 +3,14 @@
 import re
 from typing import Any
 
-import spacy
+try:
+    import spacy
+except ImportError as e:
+    msg = (
+        "spaCy is not installed. Install it with: "
+        "pip install 'nlp-research[nlp]' or pip install spacy"
+    )
+    raise ImportError(msg) from e
 
 
 class TextPreprocessor:
