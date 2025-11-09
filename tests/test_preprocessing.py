@@ -75,5 +75,5 @@ def test_preprocessor_extract_entities(preprocessor: TextPreprocessor) -> None:
 
 def test_preprocessor_init_invalid_model() -> None:
     """Test initialization with invalid language model."""
-    with pytest.raises(RuntimeError, match="Language model.*not found"):
+    with pytest.raises(RuntimeError, match=r"Language model.*not found"):
         TextPreprocessor(language="invalid_model_name")

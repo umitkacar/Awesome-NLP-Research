@@ -50,14 +50,23 @@ clean: ## Clean build artifacts and cache files
 test: ## Run tests
 	$(HATCH) run test
 
+test-parallel: ## Run tests in parallel
+	$(HATCH) run test-parallel
+
 test-cov: ## Run tests with coverage
 	$(HATCH) run test-cov
+
+test-cov-parallel: ## Run tests with coverage in parallel
+	$(HATCH) run test-cov-parallel
 
 test-unit: ## Run only unit tests
 	$(HATCH) run test -m unit
 
 test-integration: ## Run only integration tests
 	$(HATCH) run test -m integration
+
+test-fast: ## Run fast tests (not slow, not integration)
+	$(HATCH) run test -m "not slow and not integration"
 
 test-watch: ## Run tests in watch mode
 	$(HATCH) run pytest-watch

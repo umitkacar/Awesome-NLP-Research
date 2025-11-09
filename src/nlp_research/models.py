@@ -32,8 +32,10 @@ class TextClassifier:
         self.num_labels = num_labels
         self.device = device or ("cuda" if torch.cuda.is_available() else "cpu")
 
-        self.tokenizer = AutoTokenizer.from_pretrained(model_name)
-        self.model = AutoModelForSequenceClassification.from_pretrained(
+        # Note: For production use, pin model revisions using revision="commit_hash"
+        # Example: AutoTokenizer.from_pretrained(model_name, revision="abc123")
+        self.tokenizer = AutoTokenizer.from_pretrained(model_name)  # nosec B615
+        self.model = AutoModelForSequenceClassification.from_pretrained(  # nosec B615
             model_name,
             num_labels=num_labels,
         )

@@ -1,6 +1,9 @@
 """Tests for NLP models."""
 
 import pytest
+import torch
+
+from nlp_research.models import TextClassifier
 
 # Note: These tests are marked as integration tests since they require downloading models
 # Run with: pytest -m integration
@@ -10,8 +13,6 @@ import pytest
 @pytest.mark.slow
 def test_text_classifier_init() -> None:
     """Test TextClassifier initialization."""
-    from nlp_research.models import TextClassifier
-
     classifier = TextClassifier(model_name="bert-base-uncased", num_labels=2)
 
     assert classifier.model_name == "bert-base-uncased"
@@ -25,8 +26,6 @@ def test_text_classifier_init() -> None:
 @pytest.mark.slow
 def test_text_classifier_predict() -> None:
     """Test single text prediction."""
-    from nlp_research.models import TextClassifier
-
     classifier = TextClassifier(model_name="bert-base-uncased", num_labels=2)
     result = classifier.predict("This is a great movie!")
 
@@ -43,8 +42,6 @@ def test_text_classifier_predict() -> None:
 @pytest.mark.slow
 def test_text_classifier_batch_predict(sample_texts: list[str]) -> None:
     """Test batch prediction."""
-    from nlp_research.models import TextClassifier
-
     classifier = TextClassifier(model_name="bert-base-uncased", num_labels=2)
     results = classifier.batch_predict(sample_texts)
 
@@ -58,8 +55,6 @@ def test_text_classifier_batch_predict(sample_texts: list[str]) -> None:
 def test_text_classifier_device_selection() -> None:
     """Test device selection logic (unit test, no model download)."""
     # This is a simplified test that doesn't require model download
-    import torch
-
     if torch.cuda.is_available():
         expected_device = "cuda"
     elif torch.backends.mps.is_available():

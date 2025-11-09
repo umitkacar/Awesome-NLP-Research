@@ -2,7 +2,7 @@
 
 import json
 from pathlib import Path
-from typing import Any
+from typing import Any, cast
 
 import torch
 
@@ -50,7 +50,7 @@ def load_config(config_path: str | Path) -> dict[str, Any]:
         raise FileNotFoundError(msg)
 
     with config_path.open(encoding="utf-8") as f:
-        return json.load(f)
+        return cast("dict[str, Any]", json.load(f))
 
 
 def save_config(config: dict[str, Any], config_path: str | Path) -> None:

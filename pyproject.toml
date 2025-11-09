@@ -7,7 +7,7 @@ name = "nlp-research"
 version = "0.1.0"
 description = "Ultra-modern NLP Research Hub with state-of-the-art models and tools"
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 license = "MIT"
 keywords = ["nlp", "natural-language-processing", "machine-learning", "deep-learning", "transformers", "llm"]
 authors = [
@@ -16,7 +16,6 @@ authors = [
 classifiers = [
     "Development Status :: 4 - Beta",
     "Programming Language :: Python",
-    "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
@@ -51,15 +50,26 @@ dev = [
     "pytest-cov>=5.0.0",
     "pytest-asyncio>=0.23.0",
     "pytest-mock>=3.12.0",
+    "pytest-xdist>=3.5.0",  # Parallel testing
+    "pytest-timeout>=2.2.0",  # Test timeouts
     # Linting & Formatting
     "ruff>=0.3.0",
     "black>=24.0.0",
     "mypy>=1.9.0",
+    # Type stubs
+    "types-requests>=2.31.0",
+    "types-PyYAML>=6.0.0",
     # Pre-commit
     "pre-commit>=3.6.0",
+    # Security
+    "bandit[toml]>=1.7.5",
+    "safety>=3.0.0",
     # Development tools
     "ipython>=8.20.0",
     "jupyter>=1.0.0",
+    # Build tools
+    "build>=1.0.0",
+    "twine>=5.0.0",
 ]
 docs = [
     "mkdocs>=1.5.0",
@@ -86,13 +96,18 @@ dependencies = [
     "pytest",
     "pytest-cov",
     "pytest-asyncio",
+    "pytest-xdist",
+    "pytest-timeout",
 ]
 
 [tool.hatch.envs.default.scripts]
 test = "pytest {args:tests}"
-test-cov = "pytest --cov=src/nlp_research --cov-report=term-missing --cov-report=html {args:tests}"
-cov-report = "coverage report"
+test-parallel = "pytest -n auto {args:tests}"
+test-cov = "pytest --cov=src/nlp_research --cov-report=term-missing --cov-report=html --cov-report=xml {args:tests}"
+test-cov-parallel = "pytest -n auto --cov=src/nlp_research --cov-report=term-missing --cov-report=html --cov-report=xml {args:tests}"
+cov-report = "coverage report --show-missing"
 cov-html = "coverage html"
+cov-xml = "coverage xml"
 
 [tool.hatch.envs.lint]
 detached = true
@@ -206,7 +221,7 @@ extend-exclude = '''
 # MyPy Configuration
 # ============================================================================
 [tool.mypy]
-python_version = "3.9"
+python_version = "3.10"
 warn_return_any = true
 warn_unused_configs = true
 disallow_untyped_defs = true
@@ -248,16 +263,20 @@ addopts = [
     "--strict-config",
     "--showlocals",
     "--tb=short",
+    "-v",
 ]
 markers = [
     "slow: marks tests as slow (deselect with '-m \"not slow\"')",
     "integration: marks tests as integration tests",
     "unit: marks tests as unit tests",
+    "requires_gpu: marks tests that require GPU",
+    "requires_model: marks tests that require model download",
 ]
 filterwarnings = [
     "error",
     "ignore::DeprecationWarning",
     "ignore::PendingDeprecationWarning",
+    "ignore::FutureWarning",
 ]
 
 # ============================================================================

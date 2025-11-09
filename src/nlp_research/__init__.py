@@ -8,10 +8,10 @@ from nlp_research.utils import count_parameters, get_device, load_config, save_c
 
 __all__ = [
     "TextClassifier",
+    "count_parameters",
     "get_device",
     "load_config",
     "save_config",
-    "count_parameters",
 ]
 
 # Optional imports
